@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+		<div th:include="layout/cabecalho :: header"></div>
+		<div class="content-wrapper">
+	    <div class="container-fluid" >
+	      <!-- Breadcrumbs-->
+	      <ol class="breadcrumb">
+	        <li class="breadcrumb-item">
+	          <a href="#">Dashboard</a>
+	        </li>
+	        <li class="breadcrumb-item active">Encomendas</li>
+	      </ol>
+	      <div class="row">
+	        <div class="col-12">          
+	          <div class="card mb-3">
+	              <div class="card-header">
+	                <i class="fa fa-shopping-bag"></i> Rastreio Produto</div>
+	              <div class="card-body">
+	                <div class="row">
+	                  <div th:each="rastreio: ${rastreios}" class="col-sm-12 my-auto">
+	                     <p th:text="${rastreio}"></p>
+		                <hr />                
+	                  </div>
+	                </div>
+	              </div>
+	
+	              <div class="card-footer small text-muted"></div>
+	            </div>
+	        </div>
+	        
+	      </div>
+	      <!-- Example DataTables Card-->
+		    <div class="row">
+		    <div class="col-6">          
+	          <div class="card mb-3">
+	              <div class="card-header">
+	                <i class="fa fa-shopping-bag"></i> Informações do Produto</div>
+	              <div class="card-body">
+	                <div class="row">
+	                  <div class="col-sm-5 text-center my-auto">
+	                      <div class="text-primary">Loja</div>
+	                  </div>
+	                  <div class="col-sm-5 text-center my-auto">
+	                     <p th:text="${encomenda.produto.nome}"></p>
+	                  </div>                
+	                </div>
+	                <hr />  
+	                <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Pedido</div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <p th:text="${encomenda.pedido}"></p>
+	                    </div>                
+	                </div> 
+	                <hr />  
+	                <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Categoria</div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <p th:text="${encomenda.categoria.nome}"></p>
+	                    </div>                
+	                </div>  
+	                <hr />  
+	                 <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Descrição</div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <p th:text="${encomenda.descricao}"></p>
+	                    </div>                
+	                </div>                               
+	              </div>
+	
+	              <div class="card-footer small text-muted"></div>
+	            </div>
+	        </div>
+	        <div class="col-6">          
+	        <div class="card mb-3">
+	            <div class="card-header">
+	              <i class="fa fa-paper-plane-o"></i> Informações do Envio</div>
+	            <div class="card-body">
+	              <div class="row">
+	                <div class="col-sm-5 text-center my-auto">
+	                    <div class="mb-0 text-primary">Rastreio</div>
+	                </div>
+	                <div class="col-sm-5 text-center my-auto">
+	                    <p th:text="${encomenda.rastreio}"></p>
+	                </div>                
+	              </div>
+	              <hr />  
+	              <div class="row">
+	                  <div class="col-sm-5 text-center my-auto">
+	                      <div class="mb-0 text-primary">Data Compra</div>
+	                  </div>
+	                  <div class="col-sm-5 text-center my-auto">
+	                       <p th:text="${{encomenda.dataCompra}}"></p>
+	                  </div>                
+	              </div>   
+	              <hr />  
+	              <div class="row">
+	                  <div class="col-sm-5 text-center my-auto">
+	                      <div class="mb-0 text-primary">Data  Limite</div>
+	                  </div>
+	                  <div class="col-sm-5 text-center my-auto">
+	                       <p th:text="${{encomenda.dataCompra}}"></p>
+	                  </div>                
+	              </div>                
+	            </div>
+	            <div class="card-footer small text-muted"></div>
+	          </div>
+	        </div>        
+	      </div>
+	      <div class="row">
+	          <div class="col-6">          
+	            <div class="card mb-3">
+	                <div class="card-header">
+	                  <i class="fa fa-money"></i> Valores</div>
+	                <div class="card-body">
+	                  <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Compra</div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                         <p th:text="${{encomenda.valorPago}}"></p>
+	                    </div>                
+	                  </div>
+	                  <hr />  
+	                  <div class="row">
+	                      <div class="col-sm-5 text-center my-auto">
+	                          <div class="mb-0 text-primary">Venda</div>
+	                      </div>
+	                      <div class="col-sm-5 text-center my-auto">
+	                         <p th:text="${{encomenda.valorVenda}}"></p>
+	                      </div>                
+	                  </div> 
+	                  <hr />  
+	                  <div class="row">
+	                      <div class="col-sm-5 text-center my-auto">
+	                          <div class="mb-0 text-primary">Lucro</div>
+	                      </div>
+	                      <div class="col-sm-5 text-center my-auto">
+	                         <p th:text="${encomenda.valorPago}"></p>
+	                      </div>                
+	                  </div>                                
+	                </div>
+	                <div class="card-footer small text-muted"></div>
+	              </div>
+	          </div>
+	          <div class="col-6">          
+	          <div class="card mb-3">
+	              <div class="card-header">
+	                <i class="fa fa-calendar"></i> Datas</div>
+	              <div class="card-body">
+	                <div class="row">
+	                  <div class="col-sm-5 text-center my-auto">
+	                      <div class="mb-0 text-primary">Data Recebida</div>
+	                  </div>
+	                  <div class="col-sm-5 text-center my-auto">
+	                      <p th:text="${{encomenda.dataRecebida}}"></p>
+	                  </div>                
+	                </div>
+	                <hr />  
+	                <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Data Venda</div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <p th:text="${{encomenda.dataVenda}}"></p>
+	                    </div>                
+	                </div>   
+	                <hr />  
+	                <div class="row">
+	                    <div class="col-sm-5 text-center my-auto">
+	                        <div class="mb-0 text-primary">Dias </div>
+	                    </div>
+	                    <div class="col-sm-5 text-center my-auto">
+	                        01/09/2017
+	                    </div>                
+	                </div>                
+	              </div>
+	              <div class="card-footer small text-muted"></div>
+	            </div>
+		    </div>
+		    </div>
+	    </div>
+	    </div>
+	 	<div th:include="layout/rodape :: footer"></div>
+	</body>
+</html>

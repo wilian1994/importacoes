@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+		<div th:include="layout/cabecalho :: header"></div>
+		<div class="content-wrapper">
+	    <div class="container-fluid">
+	      <!-- Breadcrumbs-->
+	      <ol class="breadcrumb">
+	        <li class="breadcrumb-item">
+	          <a href="#">Dashboard</a>
+	        </li>
+	        <li class="breadcrumb-item active">Encomendas</li>
+	      </ol>
+	      <!-- Example DataTables Card-->
+	      <div class="card mb-3">
+	        <div class="card-header">
+	          <i class="fa fa-table"></i> Encomendas Aguardando</div>
+	        <div class="card-body">
+	          <div class="table-responsive">
+	            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+	              <thead>
+	                <tr align="center">
+	                  <th>Produto</th>
+	                  <th>Loja</th>
+	                  <th>Rastreio</th>
+	                  <th>Valor</th>
+	                  <th>Pedido</th>
+	                  <th>Limite</th>
+	                  <th>Ação</th>
+	                </tr>
+	              </thead>
+	              <tfoot>
+	                <tr align="center">
+	                  <th>Produto</th>
+	                  <th>Loja</th>
+	                  <th>Rastreio</th>
+	                  <th>Valor</th>
+	                  <th>Pedido</th>
+	                  <th>Limite</th>
+	                  <th>Ação</th>
+	                </tr>
+	              </tfoot>
+	              <tbody>
+					<tr th:each="encomenda : ${encomendas}" align="center">
+						<td><span th:text="${encomenda.produto.nome}"></span></td>
+						<td><span th:text="${encomenda.loja.nome}"></span></td>
+						<td><span th:text="${encomenda.rastreio}"></span></td>
+						<td><span th:id="valorPago" th:text="${{encomenda.valorPago}}"></span></td>
+						<td><span th:text="${encomenda.pedido}"></span></td>
+						<td><span th:text="${encomenda.getLimiteDataCompra()}"></span></td>
+						<td>
+					          <a class="btn btn-primary btn-sm" th:href="@{/encomendas/edit/{id}(id=${encomenda.id})}" data-toggle="tooltip"  title="Editar">
+					            <i class="fa fa-pencil"></i>
+					          </a>
+					          <a class="btn btn-success btn-sm" th:href="@{/encomendas/recebida/{id}(id=${encomenda.id})}" data-toggle="tooltip"  title="Encomenda Recebida  ">
+					            <i class="fa fa-check"></i>
+					          </a>
+					          <a class="btn btn-info btn-sm" th:href="@{/encomendas/view/{id}(id=${encomenda.id})}" data-toggle="tooltip"  title="Visualizar informações">
+					            <i class="fa fa-eye"></i>
+					          </a>
+					          <a class="btn btn-danger btn-sm" th:href="@{/encomendas/delete/{id}(id=${encomenda.id})}" data-toggle="tooltip"  title="Remover Encomenda">
+					            <i class="fa fa-trash-o"></i>
+					          </a>
+		              </td>
+					</tr>
+				 </tbody>
+	            </table>
+	          </div>
+	        </div>
+	        <div class="card-footer small text-muted"></div>
+	      </div>
+	    </div>
+	    </div>
+	 	<div th:include="layout/rodape :: footer"></div>
+	</body>
+</html>

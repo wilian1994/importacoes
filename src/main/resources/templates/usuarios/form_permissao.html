@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+	<div th:include="layout/cabecalho :: header"></div>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+				<li class="breadcrumb-item active">Blank Page</li>
+			</ol>
+
+			<div th:if="${mensagem}" class="alert alert-danger">
+				<div th:text="${mensagem}"></div>
+			</div>
+
+			<div th:if="${mensagemSave}" class="alert alert-success">
+				<div th:text="${mensagemSave}"></div>
+			</div>
+
+			<form method="POST" th:action="@{/permissao}" th:object="${permissao}">
+				<input type="hidden" th:field="*{id}"></input>
+				<div class="row">
+					<div class="col-lg-offset-3 col-lg-4">
+						<label class='control-label'>Permissão</label>
+						<div class="input-group">
+
+							<input type="text" class="form-control" th:field="*{nome}" name="permissao" placeholder="Permissão" /> 
+							<span class="input-group-btn">
+								<button class="btn btn-primary" type="submit">Salvar</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div th:include="layout/rodape :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+		<div th:include="layout/cabecalho :: header"></div>
+		<div class="content-wrapper">
+	    <div class="container-fluid">
+	      <!-- Breadcrumbs-->
+	      <ol class="breadcrumb">
+	        <li class="breadcrumb-item">
+	          <a href="#">Dashboard</a>
+	        </li>
+	        <li class="breadcrumb-item active">Usuários</li>
+	      </ol>
+	      <!-- Example DataTables Card-->
+	      <div class="card mb-3">
+	        <div class="card-header">
+	          <i class="fa fa-table"></i> Usuários</div>
+	        <div class="card-body">
+	          <div class="table-responsive">
+	            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+	              <thead>
+	                <tr align="center">
+	                  <th>Usuário</th>
+	                  <th>Login</th>
+	                  <th>E-mail</th>
+	                  <th>Permissão</th>
+	                  <th>Ativo</th>
+	                  <th>Ação</th>
+	                </tr>
+	              </thead>
+	              <tfoot>
+	                <tr align="center">
+	                   <th>Usuário</th>
+	                  <th>Login</th>
+	                  <th>E-mail</th>
+	                  <th>Permissão</th>
+	                  <th>Ativo</th>
+	                  <th>Ação</th>
+	                </tr>
+	              </tfoot>
+	              <tbody>
+					<tr th:each="usuario : ${usuarios}" align="center">
+						<td><span th:text="${usuario.nome}"></span></td>
+						<td><span th:text="${usuario.login}"></span></td>
+						<td><span th:text="${usuario.email}"></span></td>
+						<td><span th:text="${usuario.permissoesStr}"></span></td>
+						<td th:id="${usuario.id}">
+							<span th:if="${usuario.ativo == false}">
+<!-- 								 <a th:href="@{/usuario/isAtivo/{id}(id=${usuario.id})}" class="text-danger"><i class="fa fa-toggle-off"></i></a> -->
+								 <div class="text-danger" th:onclick="|finalizaAgora('${usuario.id}')|"><span class="fa fa-toggle-off"></span> </div>
+							</span>
+							<span th:if="${usuario.ativo == true}">
+								<div class="text-success" th:onclick="|finalizaAgora('${usuario.id}')|"><span class="fa fa-toggle-on"></span> </div>
+							</span>
+							
+						</td>
+						<td>
+					          <a class="btn btn-primary btn-sm" th:href="@{/usuario/edit/{id}(id=${usuario.id})}" data-toggle="tooltip"  title="Editar">
+					            <i class="fa fa-pencil"></i>
+					          </a>
+<!-- 					          <a class="btn btn-danger btn-sm" th:href="@{/usuario/delete/{id}(id=${usuario.id})}" data-toggle="tooltip"  title="Remover Encomenda"> -->
+							  <a class="btn btn-danger btn-sm" th:href="@{/usuario/delete/{id}(id=${usuario.id})}" data-toggle="tooltip"  title="Editar">
+					            <i class="fa fa-trash-o"></i>
+					          </a>	
+		              </td>
+					</tr>
+				 </tbody>
+	            </table>
+	          </div>
+	        </div>
+	        <div class="card-footer small text-muted"></div>
+	      </div>
+	    </div>
+	    </div>
+	 	<div th:include="layout/rodape :: footer"></div>
+	 	<script type="text/javascript">
+	 	/*<![CDATA[*/
+		 	function finalizaAgora(id) {
+				$.post("finalizaTarefa",	{'id'	:	id},	function() {
+								//	selecionando	o	elemento	html	através	da	
+								//	ID	e	alterando	o	HTML	dele	
+				}).done(function(usuario) {
+		 			user = jQuery.parseJSON(usuario);
+		 			console.log(user);
+		 			if(user.ativo){
+		 				var onclick = "onclick=\"finalizaAgora('"+ id +"')\"";
+		 				var $newdiv1 = $( "<div class='text-success' "+ onclick +"><span class='fa fa-toggle-on'></span> </div>" )
+		 				$("#"+id).html($newdiv1);
+		 			}else{
+		 				var onclick = "onclick=\"finalizaAgora('"+ id +"')\"";
+		 				var $newdiv1 = $( "<div class='text-danger' "+ onclick +"><span class='fa fa-toggle-off'></span> </div>" )
+		 				$("#"+id).html($newdiv1);
+		 			}
+		 			
+		 		});
+		/*]]>*/
+				
+}
+	 	
+	 	</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+	<div th:include="layout/cabecalho :: header"></div>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+				<li class="breadcrumb-item active">Blank Page</li>
+			</ol>
+
+			<div th:if="${mensagem}" class="alert alert-danger">
+				<div th:text="${mensagem}"></div>
+			</div>
+
+			<div th:if="${mensagemSave}" class="alert alert-success">
+				<div th:text="${mensagemSave}"></div>
+			</div>
+
+			<form method="POST" th:action="@{/usuario}" th:object="${usuario}">
+				<input type="hidden" th:field="*{id}"></input>
+				<div class="row">
+					<div class="col-4">
+						<label class='control-label'>Nome</label> <input class='form-control' size='4' type='text' th:field="*{nome}"/>
+					</div>
+
+					<div class="col-3">
+						<label class='control-label'>Login</label> <input class='form-control' size='4' type='text' th:field="*{login}"/>
+					</div>
+					
+					<div class="col-5">
+						<label class='control-label'>E-mail</label> <input class='form-control' size='4' type='email' th:field="*{email}"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-5">
+						<label for="control-label">Permissão</label>
+						 <select class="form-control" id="selectbasic" th:field="*{permissoes}" required="autofocus">
+							<option value="">Selecione uma permissão</option>
+							 <option th:each="permissao: ${permissoes}" 
+						                th:value="${permissao.id}" 
+						                th:text="${permissao.nome}"
+						                th:field="*{permissoes}" >                 
+						     </option>
+						</select>
+					</div>
+					<div class="col-4">
+						<label class='control-label'>Senha</label> <input class='form-control' size='4' type='password' th:field="*{senha}"/>
+					</div>
+					<div class="col-3">
+						<label for="control-label">Ativo</label>
+						 <select class="form-control" id="selectbasic" required="autofocus">
+							<option value="">Selecione uma permissão</option>
+							<option  th:selected="${ativo} == 1"  value="1"  th:field="*{ativo}">Sim</option>
+							<option  th:checked="${ativo} == 0" value="0" th:field="*{ativo}">Não</option>
+						</select>
+					</div>
+
+				</div>
+
+				<hr />
+				<div class="row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+		</form>
+	</div>
+	</div>
+	<div th:include="layout/rodape :: footer"></div>
+</body>
+</html>

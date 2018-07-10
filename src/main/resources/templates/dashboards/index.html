@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="icon" href="/images/import.jpg" th:href="@{/images/import.jpg}"  type="image/x-icon" />
+<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+	<div th:include="layout/cabecalho :: header"></div>
+
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Breadcrumbs-->
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+				<li class="breadcrumb-item active">My Dashboard</li>
+			</ol>
+			<!-- Icon Cards-->
+			<div class="row">
+				<div class="col-xl-4 col-sm-8 mb-4">
+					<div class="card text-white bg-success o-hidden h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+								<i class="fa fa-fw fa-money"></i>
+							</div>
+							<div class="mr-5">
+								<p th:text="${{lucro}}"></p>
+							</div>
+						</div>
+						<span class="card-footer text-white clearfix small z-1" href="#"> <span class="float-left">
+								<div class="">Lucro</div>
+						</span>
+						</span>
+					</div>
+				</div>
+				<div class="col-xl-4 col-sm-6 mb-4">
+					<div class="card text-white bg-danger o-hidden h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+								<i class="fa fa-fw fa-arrow-down"></i>
+							</div>
+							<div class="mr-5">
+								<p th:text="${{gasto}}"></p>
+							</div>
+						</div>
+						<span class="card-footer text-white clearfix small z-1" href="#"> <span class="float-left">
+								<div class="">Gastos</div>
+						</span>
+						</span>
+					</div>
+				</div>
+				<div class="col-xl-4 col-sm-6 mb-4">
+					<div class="card text-white bg-primary o-hidden h-100">
+						<div class="card-body">
+							<div class="card-body-icon">
+								<i class="fa fa-fw fa-arrow-up"></i>
+							</div>
+							<div class="mr-5">
+								<p th:text="${{vendas}}"></p>
+							</div>
+						</div>
+						<span class="card-footer text-white clearfix small z-1" href="#"> <span class="float-left">
+								<div class="">Ganhos</div>
+						</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="col-4">
+					<div class="card mb-2">
+						<div class="card-header">
+							<i class="fa fa-shopping-bag"></i> Top 5 Lojas - Vendas
+						</div>
+						<div class="card-body">
+							<div th:each="key: ${topLoja.keySet()}">
+								<div class="row">
+									<div class="col-sm-5 text-center my-auto">
+										<div class="h8 mb-0 text-primary">
+											<p th:text="${key.nome}"></p>
+										</div>
+									</div>
+									<div class="col-sm-5 text-center my-auto">
+										<p th:text="${#numbers.formatDecimal(topLoja.get(key),3,'POINT',2,'COMMA')}"></p>
+									</div>
+								</div>
+								<hr />
+							</div>
+						</div>
+						<div class="card-footer small text-muted"></div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="card mb-2">
+						<div class="card-header">
+							<i class="fa fa-shopping-bag"></i> Top 5 Categorias - Vendas
+						</div>
+						<div class="card-body">
+							<div th:each="key: ${topCategoria.keySet()}">
+								<div class="row">
+									<div class="col-sm-5 text-center my-auto">
+										<div class="h8 mb-0 text-primary">
+											<p th:text="${key.nome}"></p>
+										</div>
+									</div>
+									<div class="col-sm-5 text-center my-auto">
+										<p th:text="${#numbers.formatDecimal(topCategoria.get(key),3,'POINT',2,'COMMA')}"></p>
+									</div>
+								</div>
+								<hr />
+							</div>
+						</div>
+						<div class="card-footer small text-muted"></div>
+					</div>
+				</div>
+				<div class="col-4">
+					<div class="card mb-2">
+						<div class="card-header">
+							<i class="fa fa-shopping-bag"></i> Top 5 Produtos - Vendas
+						</div>
+						<div class="card-body">
+							<div th:each="key: ${topProduto.keySet()}">
+								<div class="row">
+									<div class="col-sm-5 text-center my-auto">
+										<div class="h8 mb-0 text-primary">
+											<p th:text="${key.nome}"></p>
+										</div>
+									</div>
+									<div class="col-sm-5 text-center my-auto">
+										<!-- 										<p th:text="${{topProduto.get(key)}}"></p> -->
+										<p th:text="${#numbers.formatDecimal(topProduto.get(key),3,'POINT',2,'COMMA')}"></p>
+									</div>
+								</div>
+								<hr />
+							</div>
+						</div>
+						<div class="card-footer small text-muted"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div class="card mb-2">
+						<div class="card-header">
+							<i class="fa fa-shopping-bag"></i> Produtos Recebidos
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-sm-5 text-center my-auto">
+									<div class="h8 mb-0 text-primary">Valor em Transporte</div>
+								</div>
+								<div class="col-sm-5 text-center my-auto">
+									<span th:text="${{valorProdutoAguardando}}"></span>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-5 text-center my-auto">
+									<div class="h8 mb-0 text-primary">Valor em Recebido</div>
+								</div>
+								<div class="col-sm-5 text-center my-auto">
+									<span th:text="${{valorProdutoRecebido}}"></span>
+								</div>
+							</div>
+							<hr />
+							<div class="row">
+								<div class="col-sm-5 text-center my-auto">
+									<div class="h8 mb-0 text-primary">Total</div>
+								</div>
+								<div class="col-sm-5 text-center my-auto">
+									<span th:text="${{valorProdutoAR}}"></span>
+								</div>
+							</div>
+							<hr />
+						</div>
+						<div class="card-footer small text-muted"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-header">
+					<i class="fa fa-table"></i>Controle de Encomendas
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Categoria</th>
+									<th>Estoque Minimo</th>
+									<th>Pedidos</th>
+									<th>Pedir</th>
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Categoria</th>
+									<th>Estoque Minimo</th>
+									<th>Pedidos</th>
+									<th>Pedir</th>
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="key: ${estoqueSeguranca.keySet()}" align="center">
+									<td><span th:text="${key.nome}"></span></td>
+									<td><span th:text="${key.estoqueMinimo}"></span></td>
+									<td><span th:text="${estoqueSeguranca.get(key)}"></span></td>
+									<td><span th:text="${key.estoqueMinimo - estoqueSeguranca.get(key)}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div th:include="layout/rodape :: footer"></div>
+</body>
+
+</html>

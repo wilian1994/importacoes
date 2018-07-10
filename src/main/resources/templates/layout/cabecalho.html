@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<div th:fragment="header">
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	<meta name="description" content=""/>
+	<meta name="author" content=""/>
+	<title>Controle de Importações</title>
+	<link rel="icon" href="/images/import.jpg" th:href="@{/images/import.jpg}"  type="image/x-icon" />
+	
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+	<!-- Custom fonts for this template-->
+	<link href="/vendor/font-awesome/css/font-awesome.min.css" th:href="@{/vendor/font-awesome/css/font-awesome.min.css}" rel="stylesheet"
+		type="text/css" />
+	<!-- Custom styles for this template-->
+	<link href="/css/sb-admin.css" th:href="@{/css/sb-admin.css}	" rel="stylesheet" />
+	
+	<!-- Page level plugin CSS-->
+	<link href="/vendor/datatables/dataTables.bootstrap4.css" th:href="@{/vendor/datatables/dataTables.bootstrap4.css}" rel="stylesheet" />
+	<!-- Custom styles for this template-->
+	
+  <!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="#">Encomendas</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" th:href="@{/}">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+<!--         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts"> -->
+<!--           <a class="nav-link" href="charts.html"> -->
+<!--             <i class="fa fa-fw fa-area-chart"></i> -->
+<!--             <span class="nav-link-text">Charts</span> -->
+<!--           </a> -->
+<!--         </li> -->
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Aguardando">
+          <a class="nav-link" th:href="@{/encomendas/aguardando}">
+            <i class="fa fa-fw fa-plane"></i>
+            
+            <span class="nav-link-text">Aguardando</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Recebidos">
+          <a class="nav-link" th:href="@{/encomendas/recebidos}">
+            <i class="fa fa-fw fa-check"></i>
+            <span class="nav-link-text">Recebidos</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Finalizados">
+          <a class="nav-link" th:href="@{/encomendas/finalizados}">
+            <i class="fa fa-fw fa-money "></i>
+            <span class="nav-link-text">Finalizados</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Novo">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-plus"></i>
+            <span class="nav-link-text">Novo</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a th:href="@{/encomendas}">Encomenda</a>
+            </li>
+            <li>
+              <a th:href="@{/produtos}">Produto</a>
+            </li>
+            <li>
+              <a th:href="@{/loja}">Loja</a>
+            </li>
+            <li>
+              <a th:href="@{/categorias}">Categoria</a>
+            </li>
+          </ul>
+        </li>
+	         <li th:if="${#httpServletRequest.remoteUser == 'wsilva'}" class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuários" >
+	          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
+	            <i class="	fa fa-user-plus"></i>
+	            <span class="nav-link-text">Usuários</span>
+	          </a>
+	          <ul class="sidenav-second-level collapse" id="userComponents">
+		            <li>
+		              <a th:href="@{/usuario}">Adicionar</a>
+		            </li>
+	            <li>
+	              <a th:href="@{/permissao}">Permissões</a>
+	            </li>
+	            <li >
+	              <a th:href="@{/usuario/users}">Usuários</a>
+	            </li>
+	          </ul>
+	        </li>
+	        <li th:if="${#httpServletRequest.remoteUser != 'wsilva'}" class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuários" >
+	          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
+	            <i class="	fa fa-user-plus"></i>
+	            <span class="nav-link-text">Usuários</span>
+	          </a>
+	          <ul class="sidenav-second-level collapse" id="userComponents">
+		            <li>
+		              <a th:href="@{/email/info}">Informações Pessoais</a>
+		            </li>
+	          </ul>
+	        </li>
+        
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">   
+	<div class=" nav-link pull-right" th:inline="text" > Bem vindo: [[${#httpServletRequest.remoteUser}]]  </div>    
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+    
+   </div> 
+</body>
+
+</html>

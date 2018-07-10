@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<body class="fixed-nav sticky-footer bg-dark sidenav-toggled" id="page-top">
+		<div th:include="layout/cabecalho :: header"></div>
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Breadcrumbs-->
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+					<li class="breadcrumb-item active">Blank Page</li>
+	      		</ol>
+	      		<form method="POST" th:action="@{/encomendas}" th:object="${encomenda}">
+	      		<div th:if="${mensagem}" class="alert alert-success">
+				  <div th:text="${mensagem}"></div>
+				</div>
+	      			 <input class='form-control' size='4' type='hidden' th:field="*{id}"/>
+	      			 <input class='form-control' size='4' type='hidden' th:field="*{status}"/>
+	      			 <input class='form-control' size='4' type='hidden' th:field="*{valorVenda}"/>
+	      			 <input class='form-control' size='4' type='hidden' th:field="*{dataRecebida}"/>
+	      			  <input class='form-control' size='4' type='hidden' th:field="*{usuarios}"/>
+	      			  <input class='form-control' size='4' type='hidden' th:field="*{dataCompra}"/>
+			        <div class="row">
+			        	<div class="col-4">
+				            <label for="control-label">Produto</label> 
+				            <select class="form-control"  th:field="*{produto}">
+		            			<option value="" >Selecione um produto  </option>
+						        <option th:each="produto: ${produtos}" 
+						                th:value="${{produto.id}}" 
+						                th:text="${produto.nome}" 
+						                th:field="*{produto}" >                 
+						        </option>
+							</select>
+			        	</div>
+				        <div class="form-group col-4">
+				            <label for="control-label">Categoria</label> 
+				            <select class="form-control"  th:field="*{categoria}">
+		              			<option value="" >Selecione uma categoria  </option>
+						        <option th:each="categoria: ${categorias}" 
+						                th:value="${categoria.id}" 
+						                th:text="${categoria.nome}"
+						                th:field="*{categoria}" >                 
+						        </option>
+							</select>
+				        </div>
+				        <div class="form-group col-4">          
+				          <label class='control-label'>Nº Pedido</label>
+				          <input class='form-control' size='4' type='text' th:field="*{pedido}"/>
+				        </div>
+			      </div>
+			      <div class="row">  
+			          <div class="form-group col-3">
+		              	  <label for="control-label">Loja</label> 
+			              <select class="form-control" th:field="*{loja}" >
+	              			<option value=""  >Selecione uma loja  </option>
+					        <option th:each="loja: ${lojas}" 
+					                th:value="${loja.id}" 
+					                th:text="${loja.nome}"
+					                th:field="*{loja}">                 
+					        </option>
+							</select>
+			          </div>
+			          <div class="form-group col-3">          
+			              <label class='control-label'>Rastreio</label>
+			              <input class='form-control'  type='text' th:field="*{rastreio}" />
+			          </div>
+			          <div class="form-group col-3">          
+			              <label class='control-label'>Valor Pago</label>
+			              <input class='form-control' type='text' th:field="*{valorPago}" id="valores" />
+			          </div>
+			          <div th:if="${encomenda.id == null}" class="form-group col-3">          
+			              <label class='control-label'>Quantidade</label>
+			              <input class='form-control' size='4' type='number' th:value="1" th:field="*{qtd}" id="qtd" />
+			          </div>
+			         
+			        </div>
+			        <div class="row">
+				        <div class="form-group col-12">          
+				          <label class='control-label'>Descrição</label>
+				          <textarea class='form-control' rows="4"  id="comment" th:field="*{descricao}" ></textarea>
+				        </div>
+				    </div>
+			        <div class="row">
+			            <div class="form-group col-md-12">
+			              <button type="submit"  class="btn btn-primary ">Salvar</button>
+			            </div>
+			        </div>        
+		         </form>
+		    </div>
+		</div>
+	 	<div th:include="layout/rodape :: footer"></div>
+	 	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+	 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	 	 <script>
+			 $(function() {
+	          $( "#calendario" ).datepicker({
+	        	  dateFormat: "yy-mm-dd"
+	          }
+	     	 });
+		 </script>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<div th:fragment="footer">
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Criado e desenvolvido por WDSO</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    
+     <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Informe o valor da venda</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          	<div class="container">
+		          <form method="POST" th:action="@{/encomendas/finalizada}" >
+		      			 <input class='form-control' size='4' type='hidden' id="campo" name="id"/>
+					     <div class="row">  
+				         	<div class="form-group col-12">          
+				              <label class='control-label'>Valor da Venda</label>
+				              <input class='form-control' type='' name="valorVenda" id="valores" />
+				        	</div>
+				        </div>
+				        <div class="modal-footer">
+				        	<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				            <a href="#"><button type="submit" class="btn btn-primary" >Salvar</button></a>
+				        </div>
+			      </form>
+			</div>
+        </div>
+      </div>
+    </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deseja sair ?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Selecione "Logout" se você deseja encerrar a sessão</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js" th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script src="vendor/popper/popper.min.js" th:src="@{/vendor/popper/popper.min.js}"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js" th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js" th:src="@{/js/sb-admin.min.js}"></script>
+    <!-- Bootstrap core JavaScript-->
+
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js" th:src="@{/vendor/datatables/jquery.dataTables.js}"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js" th:src="@{/vendor/datatables/dataTables.bootstrap4.js}"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js" th:src="@{/js/sb-admin-datatables.min.js}"></script>
+    <script src="/js/jquery.maskMoney.js" th:src="@{/vendor/jquery/jquery.maskMoney.min.js}" type="text/javascript"></script>
+    <script src="js/sb-admin-datatables.min.js" th:src="@{/js/ajax.js}"></script>
+    <script>
+		  $(function() {
+		    $('#valores').maskMoney({
+		    prefix: "R$ ",
+	        decimal: ",",
+	        thousands: "."
+		    });
+		  });
+	</script>
+ </div>   
+</body>
+
+</html>
